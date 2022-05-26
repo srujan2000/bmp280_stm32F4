@@ -111,7 +111,6 @@ int main(void)
    i2c_address(0xEC); //Address of BMP280
 
    set_bmp280();
-   delay1();
    i2c_stop();
   /* USER CODE END 2 */
 
