@@ -22,7 +22,7 @@ In this project, we will be reading temperature values from bmp280 using I2C com
 <section id="about">
 <h1>About I2C</h1>
 <p style="font-size:20px">
-<strong>I2C (Inter Integrated Circuit) is bi-directional communication protocol. It uses two open drain wires SCL (Serial Clock) for clock signal and SDA (serial) for data transfering. I2C has a master and a slave, clock signal is controlled by the master. I2C can be used with multiple master and slaves.<strong>&nbsp;</p>
+<strong>I2C (Inter Integrated Circuit) is bi-directional communication protocol. It uses two open drain wires SCL (Serial Clock) for clock signal and SDA (Serial Data) for data transfering. I2C has a master and a slave, clock signal is controlled by the master. I2C can be used with multiple master and slaves.<strong>&nbsp;</p>
 
 <h2>I2C Format</h2>
 <img src="images/data_frame.png">
