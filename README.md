@@ -178,7 +178,6 @@ Here, we are configuring the I2C.
 3. TRISE calculation:
   
    TRISE = (1000ns/(1/fclk))+1
-  
          = (1000ns/(1/16Mhz))+1 = 17
   
 4. Finally, Enabling the I2C in CR1.
