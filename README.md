@@ -42,7 +42,7 @@ In this project, we will be reading temperature values from bmp280 using I2C com
 
 <h3>Data Frame</h3>
 <p style="font-size:18px">
-<strong>Data Frame is 8-bit, it contains the data sent by either the master or slave. Each a data frame transfer happens, an acknowledge or no acknowledge bit is sent by either slave/master depending of R/W bit.</p>
+<strong>Data Frame is 8-bit, it contains the data sent by either the master or slave. Each time a data frame transfer happens, an acknowledge or no acknowledge bit is sent by either slave/master depending of R/W bit.</p>
 
 <h3>Acknowledge bit</h3>
 <p style="font-size:18px">
@@ -59,7 +59,7 @@ In this project, we will be reading temperature values from bmp280 using I2C com
 
 <h3>Master Sending</h3>
 <p style="font-size:18px">
-<strong>START bit is sent by the master, then master sends the address of the slave with a write bit(0), then slave sends the ack when address is matched. Master sends the address location where the data to be written and ack/nack is sent by the slave,then data frames are sent by the master. Transmission with a STOP bit from the master. <strong>&nbsp;</p>
+<strong>START bit is sent by the master, then master sends the address of the slave with a write bit(0), then slave sends the ack when address is matched. Master sends the address location where the data to be written and ack/nack is sent by the slave,then data frames are sent by the master. Transmission ends with a STOP bit from the master. <strong>&nbsp;</p>
 
 <img src="images/transmitting.jpg"><br>
 
