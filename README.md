@@ -145,7 +145,7 @@ Here, we are making configuration for GPIO pins.
 
 void config_i2c(){
   
-	   I2C1->CR1 |=  I2C_CR1_SWRST; //reset
+     I2C1->CR1 |=  I2C_CR1_SWRST; //reset
   
      I2C1->CR1 &= ~(I2C_CR1_SWRST);
   
@@ -234,16 +234,18 @@ void i2c_write(unsigned char data){
 
 These are functions to sent the data and address
 <h4>Sending Address</h4>
+	
 1. Data register(DR) is loaded with address value<br>
 2. Wait till the ADDR bit in status register is set, if it is set then address is matched.<br>
 3. Clear SR1 and SR2 registers
-<img src="images/address.jpg" style="margin-top:10px; margin-bottom:10px">
+<img src="images/address.jpg" style="margin-top:20px; margin-bottom:10px">
 
 <h4>Sending Data</h4>
+	
 1. Waits till the Data register and empty i.e TXE bit to set.
 2. Data register(DR) is loaded with data.
 3. Waits till byte transfer is completed i.e BTF bit to set.
-<img src="images/txe_rxe.jpg" style="margin-top:10px; margin-bottom:10px">
+<img src="images/txe_rxe.jpg" style="margin-top:20px; margin-bottom:10px">
 <img src="images/btf.jpg" style="margin-top:10px; margin-bottom:10px">
 
 <code>
