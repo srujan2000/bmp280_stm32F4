@@ -118,9 +118,9 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	   get_temp(3);//3 bytes as temp is 20bit data
-	   print_value();
-	   HAL_Delay(500);
+     get_temp(3);//3 bytes as temp is 20bit data
+     print_value();
+     HAL_Delay(500);
     /* USER CODE END WHILE */
     /* USER CODE BEGIN 3 */
   }
@@ -129,8 +129,8 @@ int main(void)
 
 
 void config_clk(){
-	RCC->APB1ENR |= RCC_APB1ENR_I2C1EN;
-	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOBEN;
+    RCC->APB1ENR |= RCC_APB1ENR_I2C1EN;
+    RCC->AHB1ENR |= RCC_AHB1ENR_GPIOBEN;
 }
 
 void config_gpio(){
@@ -147,7 +147,7 @@ void config_gpio(){
 }
 
 void config_i2c(){
-	 I2C1->CR1 |=  I2C_CR1_SWRST; //reset
+     I2C1->CR1 |=  I2C_CR1_SWRST; //reset
      I2C1->CR1 &= ~(I2C_CR1_SWRST);
 
      I2C1->CR2 |= (16<<0); //f_clk 16Mhz
@@ -163,7 +163,7 @@ void i2c_start(){
 }
 
 void i2c_stop(){
-   I2C1->CR1 |= I2C_CR1_STOP;//i2c stop
+    I2C1->CR1 |= I2C_CR1_STOP;//i2c stop
 }
 
 void i2c_address(unsigned char addr){
@@ -173,16 +173,16 @@ void i2c_address(unsigned char addr){
 }
 
 void i2c_write(unsigned char data){
-	while(!(I2C1->SR1 & I2C_SR1_TXE));//wait till data register is empty
-	I2C1->DR = data;
-	while(!(I2C1->SR1 & I2C_SR1_BTF));//wait till byte transfer is complete
+   while(!(I2C1->SR1 & I2C_SR1_TXE));//wait till data register is empty
+   I2C1->DR = data;
+   while(!(I2C1->SR1 & I2C_SR1_BTF));//wait till byte transfer is complete
 }
 
 void set_bmp280(){
-	i2c_write(0xF4);//Mode and sampling regsiter
-	i2c_write(0x23);//Normal Mode ,16x sampling
-	i2c_write(0xF5);//config register
-	i2c_write(0x80);//standby_mode-500 and filter and NO SPI
+   i2c_write(0xF4);//Mode and sampling regsiter
+   i2c_write(0x23);//Normal Mode ,16x sampling
+   i2c_write(0xF5);//config register
+   i2c_write(0x80);//standby_mode-500 and filter and NO SPI
 }
 
 void get_temp(int byteno){
@@ -209,20 +209,20 @@ void get_temp(int byteno){
 }
 
 void print_value(){
-	char str2[10];
+    char str2[10];
 
-	raw_temp = (((long)data_buffer[0]<<12) | ((long)data_buffer[1]<<4)|((long)data_buffer[2]>>4))& 0xFFFFFFFF ;
+    raw_temp = (((long)data_buffer[0]<<12) | ((long)data_buffer[1]<<4)|((long)data_buffer[2]>>4))& 0xFFFFFFFF ;
     temperature = temp_calc(raw_temp);
 
-	sprintf(str2,"%d",temperature);
-	for(int i=0;i<strlen(str2);i++){
-		send_char(str2[i]);
-		if(i==1){
-			send_char('.');
-		}
+    sprintf(str2,"%d",temperature);
+      for(int i=0;i<strlen(str2);i++){
+	 send_char(str2[i]);
+	    if(i==1){
+		send_char('.');
+	    }
 	}
-	send_char('C');
-	send_char('\n');
+     send_char('C');
+     send_char('\n');
 
 }
 
@@ -257,9 +257,6 @@ void uart2_config(void){
 
 	USART2->CR1 |= USART_CR1_RE; //rx enable
 	USART2->CR1 |= USART_CR1_TE;//tx enable
-
-    USART2->CR1 |= USART_CR1_TXEIE; //tx interrupt enable
-    USART2->CR1 |= USART_CR1_TCIE; //TCIE interrupt enable
 }
 
 void send_char(unsigned char data){
