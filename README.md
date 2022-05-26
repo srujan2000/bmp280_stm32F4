@@ -95,8 +95,8 @@ In this project, we will be reading temperature values from bmp280 using I2C com
 <section id="code">
 <h2>Code Explanation</h2>
 
-<code>
 
+```
 void config_clk(){
   
 	RCC->APB1ENR |= RCC_APB1ENR_I2C1EN;
@@ -105,11 +105,11 @@ void config_clk(){
   
 }
 
-</code>
+```
 
 Here, we are enabling clock I2C1, since SCL and SDA pins for I2C1 are PA8 and PA9, we are enbling clock for GPIOA as well.
 
-<code>
+```
 
 void config_gpio(){
   
@@ -129,7 +129,7 @@ void config_gpio(){
   
 }
 
-</code>
+```
 
 Here, we are making configuration for GPIO pins.
 1. For Port mode Alternate Mode is selected for Pin 8 and 9.
@@ -141,7 +141,7 @@ Here, we are making configuration for GPIO pins.
 <img src="images/af.jpg" style="margin-top:10px; margin-bottom:10px">
 <img src="images/af1.jpg" style="margin-top:10px; margin-bottom:10px">
 
-<code>
+```
 
 void config_i2c(){
   
@@ -158,7 +158,7 @@ void config_i2c(){
      I2C1->CR1 |= I2C_CR1_PE; // I2C enable
 }
 
-</code>
+```
 
 Here, we are configuring the I2C.
   
@@ -183,7 +183,7 @@ Here, we are configuring the I2C.
   
 4. Finally, Enabling the I2C in CR1.
 
-<code>
+```
 
 void i2c_start(){
   
@@ -198,7 +198,7 @@ void i2c_stop(){
   
 }
 
-</code>
+```
 
 These are start and Stop function for I2C.
 1. Start bit is set in CR1 register.
@@ -208,7 +208,7 @@ These are start and Stop function for I2C.
 
 <img src="images/start.jpg" style="margin-top:10px; margin-bottom:10px">
 
-<code>
+```
 
 void i2c_address(unsigned char addr){
   
@@ -230,7 +230,7 @@ void i2c_write(unsigned char data){
 }
 
 
-</code>
+```
 
 These are functions to sent the data and address
 <h4>Sending Address</h4>
@@ -248,7 +248,7 @@ These are functions to sent the data and address
 <img src="images/txe_rxe.jpg" style="margin-top:20px; margin-bottom:10px">
 <img src="images/btf.jpg" style="margin-top:10px; margin-bottom:10px">
 
-<code>
+```
 
 void set_bmp280(){
   
@@ -261,13 +261,14 @@ void set_bmp280(){
 	i2c_write(0x8C);//standby_mode-500 and filter and NO SPI
 }
 
-</code>
+```
+	
 Here, we are setting mode,sampling,filter,stand by mode.
 
 1. At 0xF4 location, we are setting mode as normal mode and temperature sampling as x16.
 2. At 0xF5 location, we are setting standby and filter.
 
-<code>
+```
 
 void get_temp(int byteno){
   
@@ -305,7 +306,7 @@ void get_temp(int byteno){
   
 }
 
-</code>
+```
 
 Here, we are storing the data from msb,lsb,x_lsb 20-bit data from the registers into data_buffer array.
 
@@ -317,7 +318,7 @@ Here, we are storing the data from msb,lsb,x_lsb 20-bit data from the registers 
 6. For last byte, ack is reset in CR1.
 7. Stop function is called.
 
-<code>
+```
 
 raw_temp = (((long)data_buffer[0]<<12) | ((long)data_buffer[1]<<4)|((long)data_buffer[2]>>4))& 0xFFFFFFFF ;
 
@@ -343,12 +344,12 @@ long temp_calc(long adc_T){
 	return T;
 }
 
-</code>
+```
 
 1. The data stored in the array is converted to a 20-bit and stored in the raw_temp  variable.
 2. long_temp function is used to convert the 20-bit value into meaningful information. For example, if it returns the value as 2687, then the temperature is 26.87 centrigrade. This function can be found bmp280 datasheet.
 
-<code>
+```
 
 void print_value(){
   
@@ -356,7 +357,7 @@ void print_value(){
   
 	raw_temp = (((long)data_buffer[0]<<12) | ((long)data_buffer[1]<<4)|((long)data_buffer[2]>>4))& 0xFFFFFFFF ;
   
-  temperature = temp_calc(raw_temp);
+        temperature = temp_calc(raw_temp);
   
 	sprintf(str2,"%d",temperature);
   
@@ -377,7 +378,7 @@ void print_value(){
 
 }
 
-</code>
+```
 
 This function is used to print values using UART.
 </section>
