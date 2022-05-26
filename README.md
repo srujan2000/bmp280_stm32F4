@@ -107,7 +107,7 @@ void config_clk(){
 
 ```
 
-Here, we are enabling clock I2C1, since SCL and SDA pins for I2C1 are PA8 and PA9, we are enbling clock for GPIOA as well.
+Here, we are enabling clock for I2C1, since SCL and SDA pins for I2C1 are PA8 and PA9, we are enbling clock for GPIOA as well.
 
 ```
 
